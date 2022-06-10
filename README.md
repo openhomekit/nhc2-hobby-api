@@ -1,10 +1,8 @@
 # nhc2-hobby-api 
-[![Version](http://img.shields.io/npm/v/@homebridge-nhc2/nhc2-hobby-api.png)](https://www.npmjs.com/package/@homebridge-nhc2/nhc2-hobby-api)
-[![License](https://img.shields.io/npm/l/@homebridge-nhc2/nhc2-hobby-api.svg)](https://github.com/homebridge-nhc2/nhc2-hobby-api/blob/master/LICENSE)
-[![Downloads](https://img.shields.io/npm/dt/@homebridge-nhc2/nhc2-hobby-api.svg)](https://www.npmjs.com/package/@homebridge-nhc2/nhc2-hobby-api)
-[![Build Status](https://travis-ci.com/homebridge-nhc2/nhc2-hobby-api.svg?branch=master)](https://travis-ci.com/homebridge-nhc2/nhc2-hobby-api)
-[![Coverage Status](https://coveralls.io/repos/github/homebridge-nhc2/nhc2-hobby-api/badge.svg?branch=master)](https://coveralls.io/github/homebridge-nhc2/nhc2-hobby-api?branch=master)
-[![Dependencies](https://david-dm.org/homebridge-nhc2/nhc2-hobby-api.svg)](https://david-dm.org/homebridge-nhc2/nhc2-hobby-api)
+[![Version](http://img.shields.io/npm/v/@openhomekit/nhc2-hobby-api.png)](https://www.npmjs.com/package/@openhomekit/nhc2-hobby-api)
+[![License](https://img.shields.io/npm/l/@openhomekit/nhc2-hobby-api.svg)](https://github.com/homebridge-nhc2/nhc2-hobby-api/blob/master/LICENSE)
+[![Downloads](https://img.shields.io/npm/dt/@openhomekit/nhc2-hobby-api.svg)](https://www.npmjs.com/package/@openhomekit/nhc2-hobby-api)
+[![Node.js Package](https://github.com/openhomekit/nhc2-hobby-api/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/openhomekit/nhc2-hobby-api/actions/workflows/npm-publish.yml)
 
 As of October 29, 2019 Niko has published their [Hobby API](https://www.niko.eu/en/campaign/niko-home-control/hobby-api) which allows end users to control their Niko Home Control 2 installation through the MQTT protocol.
 
@@ -12,11 +10,14 @@ This library is a wrapper library around the [MQTT.js](https://github.com/mqttjs
 * query available devices in a NHC2 installation
 * listen on light status change
 * listen on light brightness change
+* listen on moving status change
+* listen on position change
 
 The library can also control your installation through commands. Commands supported include:
 * toggle light status
 * set light brightness level
 * change position (e.g. of sunblinds)
+* set fan speed
 * toggle generic switches (free start stop actions)
 
 ## Changes
@@ -77,31 +78,13 @@ intervention of professionals of which costs cannot be returned by the project t
 # Installation
 
 In order to use the library and/or samples you must first download and install
-[NodeJS](http://nodejs.org). An installable [nhc2-hobby-api](https://www.npmjs.com/package/nhc2-hobby-api) module for [npm](http://npmjs.org) 
+[NodeJS](http://nodejs.org). An installable [nhc2-hobby-api](https://www.npmjs.com/package/@openhomekit/nhc2-hobby-api) module for [npm](http://npmjs.org) 
 is available.
 
 To download and install the library and all of its dependencies to a local 
 project directory use the following:
 
-    npm install @homebridge-nhc2/nhc2-hobby-api
-
-If you are building an npm package that depends upon this library then you 
-will want to use the **--save** parameter in order to update the 
-**package.json** file for your project. For example:
-
-    npm install @homebridge-nhc2/nhc2-hobby-api --save
-    
-If you prefer to download and install the library globally for all future 
-node projects you may use:
-
-    npm install -g nhc2-hobby-api
-
-You may also install directly from the GitHub 
-[source](https://github.com/homebridge-nhc2/nhc2-hobby-api). Either download and unzip 
-the source, or clone the repository.
-
-> Remember, whether you install via ZIP source or Git clone you must install 
-> the dependencies before using nhc2-hobby-api.
+    npm install @openhomekit/nhc2-hobby-api
 
 To install dependencies via npm, from the root level of the library directory 
 type:
@@ -203,8 +186,4 @@ some basic usage scenarios for the library.  These samples are written in typesc
     node turn-on-all-lights.js 
 
 # Releasing a new version
-To release a new version it is sufficient to bump the version number, and make sure to push the tagged commit. 
-Travis CI will recognize the tagged commit and publish the package to npmjs.
-```bash
-    npm version 2.0.0
-```
+To release a new version it is sufficient to bump the version number and push the changes, then create a new version on github that will create a tag for you. Github CI will see the new version and publish to NPM.
