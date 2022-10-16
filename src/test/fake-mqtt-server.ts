@@ -16,21 +16,25 @@ export default class FakeMqttServer {
     this.server = createServer(this.broker.handle);
     this.server.listen(this.PORT, noop);
     // this.server = new Server({ port: this.PORT });
-    this.broker.subscribe(LIST_DEVICES_COMMAND_TOPIC, (packet, _) => {
-      switch (packet.topic) {
-        case LIST_DEVICES_COMMAND_TOPIC:
-          const message: Command = {
-            topic: packet.topic,
-            data: JSON.parse(packet.payload.toString()),
-          };
+    this.broker.subscribe(
+      LIST_DEVICES_COMMAND_TOPIC,
+      (packet, _) => {
+        switch (packet.topic) {
+          case LIST_DEVICES_COMMAND_TOPIC:
+            const message: Command = {
+              topic: packet.topic,
+              data: JSON.parse(packet.payload.toString()),
+            };
 
-          switch (message.data.Method) {
-            case Method.DEVICES_LIST:
-              this.broker.publish(buildEvent(LIST_DEVICS_EVENT), noop);
-              break;
-          }
-      }
-    }, noop);
+            switch (message.data.Method) {
+              case Method.DEVICES_LIST:
+                this.broker.publish(buildEvent(LIST_DEVICS_EVENT), noop);
+                break;
+            }
+        }
+      },
+      noop,
+    );
   }
 
   close() {
