@@ -6,6 +6,7 @@ import { BrightnessChangeCommand } from './command/brightness-change-command';
 import { Command } from './command/command';
 import { FanSpeedChangeCommand } from './command/fan-speed-change-command';
 import { isListDevicesEvent, ListDevicesCommand } from './command/list-devices-command';
+import { OverruleTemperatureCommand } from './command/overrule-temperature-command';
 import { PositionChangeCommand } from './command/position-change-command';
 import { StatusChangeCommand } from './command/status-change-command';
 import { TriggerBasicStateCommand } from './command/trigger-basic-state-command';
@@ -41,9 +42,9 @@ export class NHC2 {
           flatMap(event => event.Params),
           map(params => params.Devices),
         )
-        .subscribe(devices =>
-          resolve(devices.filter(device => device.Online === 'True' && device.Type !== 'gatewayfw')),
-        );
+        .subscribe(devices => {
+          resolve(devices.filter(device => device.Online === 'True' && device.Type !== 'gatewayfw'));
+        });
     });
   }
 
@@ -69,6 +70,17 @@ export class NHC2 {
 
   public sendFanSpeedCommand(deviceUuid: string, fanSpeed: FanSpeed) {
     this.sendCommand(FanSpeedChangeCommand(deviceUuid, fanSpeed));
+  }
+
+  public sendTempOverruleCommand(deviceUuid: string, active: boolean, setpoint: number, minutes?: number) {
+    this.sendCommand(
+      OverruleTemperatureCommand(
+        deviceUuid,
+        active ? 'true' : 'false',
+        String(setpoint),
+        minutes ? String(minutes) : undefined,
+      ),
+    );
   }
 
   public async subscribe() {

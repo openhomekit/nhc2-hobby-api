@@ -1,5 +1,7 @@
 # Changelog
 
+## v2.2.0
+* Added support for thermostats
 ## v2.0.2
 * Replaced Mosca with Aedes
 ## v2.0.0

@@ -1,3 +1,4 @@
+import { Demand } from './Demand';
 import { FanSpeed } from './FanSpeed';
 
 export interface Property {
@@ -7,4 +8,10 @@ export interface Property {
   BasicState?: string;
   FanSpeed?: FanSpeed;
   Moving?: string;
+  OverruleActive?: string;
+  OverruleSetpoint?: string;
+  OverruleTime?: string;
+  AmbientTemperature?: string;
+  SetpointTemperature?: string;
+  Demand?: Demand;
 }
