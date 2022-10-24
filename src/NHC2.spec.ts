@@ -6,6 +6,7 @@ import { Method } from './command/method';
 import { POSITION_CHANGE_COMMAND_TOPIC } from './command/position-change-command';
 import { STATUS_CHANGE_COMMAND_TOPIC } from './command/status-change-command';
 import { FanSpeed } from './event/FanSpeed';
+import { Program } from './event/Program';
 import { NHC2 } from './NHC2';
 import {
   BRIGHTNESS_CHANGED_EVENT,
@@ -322,6 +323,25 @@ describe('NHC2', () => {
         );
 
         nhc2.sendFanSpeedCommand('abd4b98b-f197-42ed-a51a-1681b9176228', FanSpeed.Medium);
+      });
+    });
+
+    describe('program event', () => {
+      it('should send the program change command', done => {
+        fakeMqttServer.broker.subscribe(
+          STATUS_CHANGE_COMMAND_TOPIC,
+          (packet, _) => {
+            if (packet.topic === STATUS_CHANGE_COMMAND_TOPIC) {
+              expect(packet.payload.toString()).toBe(
+                '{"Method":"devices.control","Params":[{"Devices":[{"Uuid":"abd4b98b-f197-42ed-a51a-1681b9176228","Properties":[{"Program":"Cool"}]}]}]}',
+              );
+              done();
+            }
+          },
+          noop,
+        );
+
+        nhc2.sendProgramCommand('abd4b98b-f197-42ed-a51a-1681b9176228', Program.Cool);
       });
     });
 

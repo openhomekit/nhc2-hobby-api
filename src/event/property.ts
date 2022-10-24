@@ -1,5 +1,6 @@
 import { Demand } from './Demand';
 import { FanSpeed } from './FanSpeed';
+import { Program } from './Program';
 
 export interface Property {
   Brightness?: string;
@@ -14,4 +15,5 @@ export interface Property {
   AmbientTemperature?: string;
   SetpointTemperature?: string;
   Demand?: Demand;
+  Program?: Program;
 }
