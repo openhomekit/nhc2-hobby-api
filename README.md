@@ -16,7 +16,7 @@ This library is a wrapper library around the [MQTT.js](https://github.com/mqttjs
 The library can also control your installation through commands. Commands supported include:
 * toggle light status
 * set light brightness level
-* change position (e.g. of sunblinds)
+* change position (e.g. of sun-blinds)
 * set fan speed
 * toggle generic switches (free start stop actions)
 
@@ -58,7 +58,7 @@ community.
 
 # Hobby API Documentation
 
-The Hobby API encapusulated by this library is documented by Niko which can be found [here](https://mynikohomecontrol.niko.eu/Content/hobbyapi/documentation.pdf)
+The Hobby API encapsulated by this library is documented by Niko which can be found [here](https://mynikohomecontrol.niko.eu/Content/hobbyapi/documentation.pdf)
 	
 # Warranty Disclaimer
 
@@ -126,14 +126,14 @@ The following properties are set by Niko:
 > disconnect/reconnect and may skip MQTT messages since messages are not retained 
 > and broadcasted with QoS set to 0.
 
-We need to wait untill subscriptions to MQTT topics are completed before we are able to control the installation. This can be done using the `NHC2.prototype.subscribe` method which returns a promise.
+We need to wait until subscriptions to MQTT topics are completed before we are able to control the installation. This can be done using the `NHC2.prototype.subscribe` method which returns a promise.
 ```javascript
     nhc2.subscribe().then(function () {
         // Now you are ready to start querying NHC2
     });
 ```
 
-Because of the async process we are dealing with when sending/receiving messages, and the possible callback hell, it is preffered to make use of the Javascript async/await syntax.
+Because of the async process we are dealing with when sending/receiving messages, and the possible callback hell, it is preferred to make use of the Javascript async/await syntax.
 ```javascript
     (async () => {
         await nhc2.subscribe();
@@ -145,7 +145,7 @@ Because of the async process we are dealing with when sending/receiving messages
 ```javascript
     var accessories = await nhc2.getAccessories();
 ```
-> Note: currently only accesories of type `action` are returned since these 
+> Note: currently only accessories of type `action` are returned since these 
 > are the only accessories which we can control.
 
 ## Listen on incoming events
@@ -158,7 +158,7 @@ Because of the async process we are dealing with when sending/receiving messages
 > Note: currently only events controlling accessories of type `light` 
 > or `dimmer` are returned.
 
-## Change the status of an accesory
+## Change the status of an accessory
 
 `NHC2.prototype.sendStatusChangeCommand` allows you to control the status of lights.
 
@@ -167,7 +167,7 @@ Because of the async process we are dealing with when sending/receiving messages
     nhc2.sendStatusChangeCommand(light.Uuid, true);
 ```
 
-## Change the brightness of an accesory
+## Change the brightness of an accessory
 
 `NHC2.prototype.sendStatusChangeCommand` allows you to control the status of lights.
 

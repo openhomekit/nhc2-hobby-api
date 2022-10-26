@@ -1,6 +1,7 @@
 import { Event } from '../event/event';
 import { Method } from '../command/method';
 import { FanSpeed } from '../event/FanSpeed';
+import { Program } from '../event/Program';
 
 export const POSITION_CHANGED_EVENT: Event = {
   Method: Method.DEVICES_STATUS,
@@ -93,6 +94,20 @@ export const OVERRULE_TEMP_EVENT: Event = {
       Devices: [
         {
           Properties: [{ OverruleActive: 'True', OverruleSetpoint: '25.00', OverruleTime: '1439' }],
+          Uuid: '25ee33e3-5b9c-4171-8ede-7e94f1cb6b33',
+        },
+      ],
+    },
+  ],
+};
+
+export const PROGRAM_EVENT: Event = {
+  Method: Method.DEVICES_STATUS,
+  Params: [
+    {
+      Devices: [
+        {
+          Properties: [{ Program: Program.Cool }],
           Uuid: '25ee33e3-5b9c-4171-8ede-7e94f1cb6b33',
         },
       ],
