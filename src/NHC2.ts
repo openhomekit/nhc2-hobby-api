@@ -4,6 +4,8 @@ import { Observable, Subject } from 'rxjs';
 import { filter, flatMap, map } from 'rxjs/operators';
 import { BrightnessChangeCommand } from './command/brightness-change-command';
 import { Command } from './command/command';
+import { BoostChangeCommand } from './command/boost-change-command';
+import { ChargingModeChangeCommand } from './command/charging-mode-change-command';
 import { FanSpeedChangeCommand } from './command/fan-speed-change-command';
 import { isListDevicesEvent, ListDevicesCommand } from './command/list-devices-command';
 import { OverruleTemperatureCommand } from './command/overrule-temperature-command';
@@ -15,6 +17,7 @@ import { Device } from './event/device';
 import { Event } from './event/event';
 import { FanSpeed } from './event/FanSpeed';
 import { Program } from './event/Program';
+import { ChargingMode } from './event/ChargingMode';
 
 export class NHC2 {
   public readonly client: mqtt.MqttClient;
@@ -76,6 +79,14 @@ export class NHC2 {
 
   public sendProgramCommand(deviceUuid: string, program: Program) {
     this.sendCommand(ProgramChangeCommand(deviceUuid, program));
+  }
+
+  public sendChargingModeChangeCommand(deviceUuid: string, chargingMode: ChargingMode) {
+    this.sendCommand(ChargingModeChangeCommand(deviceUuid, chargingMode));
+  }
+
+  public sendBoostChangeCommand(deviceUuid: string, boost: boolean) {
+    this.sendCommand(BoostChangeCommand(deviceUuid, boost ? 'On' : 'Off'));
   }
 
   public sendTempOverruleCommand(deviceUuid: string, active: boolean, setpoint: number, minutes?: number) {
