@@ -2,10 +2,10 @@ import * as mqtt from 'mqtt';
 import { IClientOptions } from 'mqtt';
 import { Observable, Subject } from 'rxjs';
 import { filter, flatMap, map } from 'rxjs/operators';
-import { BrightnessChangeCommand } from './command/brightness-change-command';
-import { Command } from './command/command';
 import { BoostChangeCommand } from './command/boost-change-command';
+import { BrightnessChangeCommand } from './command/brightness-change-command';
 import { ChargingModeChangeCommand } from './command/charging-mode-change-command';
+import { Command } from './command/command';
 import { FanSpeedChangeCommand } from './command/fan-speed-change-command';
 import { isListDevicesEvent, ListDevicesCommand } from './command/list-devices-command';
 import { OverruleTemperatureCommand } from './command/overrule-temperature-command';
@@ -13,11 +13,11 @@ import { PositionChangeCommand } from './command/position-change-command';
 import { ProgramChangeCommand } from './command/program-command';
 import { StatusChangeCommand } from './command/status-change-command';
 import { TriggerBasicStateCommand } from './command/trigger-basic-state-command';
+import { ChargingMode } from './event/ChargingMode';
 import { Device } from './event/device';
 import { Event } from './event/event';
 import { FanSpeed } from './event/FanSpeed';
 import { Program } from './event/Program';
-import { ChargingMode } from './event/ChargingMode';
 
 export class NHC2 {
   public readonly client: mqtt.MqttClient;
