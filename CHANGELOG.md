@@ -1,5 +1,7 @@
 # Changelog
 
+## v2.5.0
+* Added support for EV charging stations
 ## v2.3.0
 * Added support for thermostat Programs
 ## v2.2.0

@@ -5,6 +5,7 @@ import { LIST_DEVICES_COMMAND_TOPIC } from './command/list-devices-command';
 import { Method } from './command/method';
 import { POSITION_CHANGE_COMMAND_TOPIC } from './command/position-change-command';
 import { STATUS_CHANGE_COMMAND_TOPIC } from './command/status-change-command';
+import { ChargingMode } from './event/ChargingMode';
 import { FanSpeed } from './event/FanSpeed';
 import { Program } from './event/Program';
 import { NHC2 } from './NHC2';
@@ -361,6 +362,44 @@ describe('NHC2', () => {
         );
 
         nhc2.sendTempOverruleCommand('abd4b98b-f197-42ed-a51a-1681b9176228', true, 25, 1439);
+      });
+    });
+
+    describe('charging mode change event', () => {
+      it('should send the charging mode change command', done => {
+        fakeMqttServer.broker.subscribe(
+          STATUS_CHANGE_COMMAND_TOPIC,
+          (packet, _) => {
+            if (packet.topic === STATUS_CHANGE_COMMAND_TOPIC) {
+              expect(packet.payload.toString()).toBe(
+                '{"Method":"devices.control","Params":[{"Devices":[{"Uuid":"abd4b98b-f197-42ed-a51a-1681b9176228","Properties":[{"ChargingMode":"Solar"}]}]}]}',
+              );
+              done();
+            }
+          },
+          noop,
+        );
+
+        nhc2.sendChargingModeChangeCommand('abd4b98b-f197-42ed-a51a-1681b9176228', ChargingMode.Solar);
+      });
+    });
+
+    describe('boost change event', () => {
+      it('should send the boost change command', done => {
+        fakeMqttServer.broker.subscribe(
+          STATUS_CHANGE_COMMAND_TOPIC,
+          (packet, _) => {
+            if (packet.topic === STATUS_CHANGE_COMMAND_TOPIC) {
+              expect(packet.payload.toString()).toBe(
+                '{"Method":"devices.control","Params":[{"Devices":[{"Uuid":"abd4b98b-f197-42ed-a51a-1681b9176228","Properties":[{"Boost":"On"}]}]}]}',
+              );
+              done();
+            }
+          },
+          noop,
+        );
+
+        nhc2.sendBoostChangeCommand('abd4b98b-f197-42ed-a51a-1681b9176228', true);
       });
     });
   });

@@ -19,6 +19,7 @@ The library can also control your installation through commands. Commands suppor
 * change position (e.g. of sun-blinds)
 * set fan speed
 * toggle generic switches (free start stop actions)
+* toggle an EV charger, or change its charging mode
 
 ## Changes
 
